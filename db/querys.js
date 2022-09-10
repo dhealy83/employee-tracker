@@ -14,7 +14,7 @@ class Querys {
     return this.connection
       .promise()
       .query(
-        "SELECT * FROM role.title, role.id, department.name AS departmentName, role.salary FROM role JOIN department ON role.department_id = department.id;"
+        "SELECT role.title, role.id, department.name AS departmentName, role.salary FROM role JOIN department ON role.department_id = department.id;"
       );
   }
   getEmployees() {
@@ -22,7 +22,7 @@ class Querys {
     return this.connection
       .promise()
       .query(
-        "SELECT employee.id, employee.first_name +' '+ employee,last_name AS employeeName FROM employee, role.title, department.name, role.salary, employee.manager_id, "
+        "SELECT employee.id, employee.first_name +' '+ employee,last_name AS employeeName FROM employee JOIN employee ON employee.name_id = role.id, role.title, department.name, role.salary, employee.manager_id,;"
       );
   }
 }

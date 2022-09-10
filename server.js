@@ -24,16 +24,11 @@ function start() {
         case "View all departments.":
           viewAllDepartments();
           break;
-        default:
-          break;
-      }
-    })
-    .then((answer) => {
-      switch (answer.getRoles) {
         case "View all roles.":
           viewAllRoles();
           break;
-        default:
+        case "View all employees.":
+          viewAllEmployees();
           break;
       }
     });
@@ -48,8 +43,15 @@ const viewAllDepartments = () => {
 };
 const viewAllRoles = () => {
   db.getRoles()
-    .then((role) => {
+    .then(([role]) => {
       console.table(role);
+    })
+    .then(() => start());
+};
+const viewAllEmployees = () => {
+  db.getEmployees()
+    .then((employees) => {
+      console.table(employees);
     })
     .then(() => start());
 };
