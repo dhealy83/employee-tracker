@@ -22,7 +22,7 @@ class Querys {
     return this.connection
       .promise()
       .query(
-        "SELECT employee.id, employee.first_name, employee,last_name, role.title"
+        "SELECT employee.id, employee.first_name +' '+ employee,last_name AS employeeName FROM employee, role.title, department.name, role.salary, employee.manager_id, "
       );
   }
 }

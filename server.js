@@ -27,6 +27,15 @@ function start() {
         default:
           break;
       }
+    })
+    .then((answer) => {
+      switch (answer.getRoles) {
+        case "View all roles.":
+          viewAllRoles();
+          break;
+        default:
+          break;
+      }
     });
 }
 
@@ -34,6 +43,13 @@ const viewAllDepartments = () => {
   db.getDepartments()
     .then(([departments]) => {
       console.table(departments);
+    })
+    .then(() => start());
+};
+const viewAllRoles = () => {
+  db.getRoles()
+    .then((role) => {
+      console.table(role);
     })
     .then(() => start());
 };
