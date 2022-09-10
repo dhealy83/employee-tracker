@@ -50,7 +50,7 @@ const viewAllRoles = () => {
 };
 const viewAllEmployees = () => {
   db.getEmployees()
-    .then((employees) => {
+    .then(([employees]) => {
       console.table(employees);
     })
     .then(() => start());
