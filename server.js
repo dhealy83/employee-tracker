@@ -40,9 +40,9 @@ function start() {
         case "Add an employee.":
           addEmployee();
           break;
-        // case "Update employee role.":
-        //   updateRole();
-        //   break;
+        case "Update employee role.":
+          updatedRole();
+          break;
       }
     });
 }
@@ -145,7 +145,7 @@ const addEmployee = () => {
       {
         type: "input",
         name: "role",
-        message: "What is the employees role?",
+        message: "What is the employees role_id?",
       },
       {
         type: "input",
@@ -155,11 +155,38 @@ const addEmployee = () => {
     ])
     .then((emp) => {
       let newEmp = emp.addDept;
-      let sql = `INSERT INTO employee VALUES (default, "${newEmp}", "${last_name}", "${role}", "${manager}")`;
+      let sql = `INSERT INTO employee VALUES (default, "${emp.first_name}", "${emp.last_name}", "${emp.role}", "${emp.manager}")`;
       db2.query(sql, newEmp, (err, res) => {
         if (err) throw err;
         console.info("");
         console.info(`Added ${newEmp} to employees.`);
+        console.info("");
+
+        start();
+      });
+    });
+};
+const updatedRole = () => {
+  inquirer
+    .prompt([
+      {
+        type: "confirm",
+        name: "updateEmp",
+        message: "Do you want to update an employee?",
+      },
+      {
+        type: "input",
+        name: "newRole",
+        message: "What is there new role_id?",
+      },
+    ])
+    .then((newRole) => {
+      let updatedRole = newRole.role;
+      let sql = `INSERT INTO role VALUES (default, "${newRole}")`;
+      db2.query(sql, newRole, (err, res) => {
+        if (err) throw err;
+        console.info("");
+        console.info(`Role has been changed to "${updatedRole}"`);
         console.info("");
 
         start();
