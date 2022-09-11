@@ -30,28 +30,51 @@ function start() {
         case "View all employees.":
           viewAllEmployees();
           break;
+        case "Add a department.":
+          addDepartment();
+          break;
       }
     });
-}
+  const addDepartment = () => {
+    inquirer
+      .prompt([
+        {
+          Message: "What department would you like to add?",
+          type: "input",
+          name: "name",
+        },
+      ])
+      .then((department) => {
+        db.query("INSERT INTO department SET ?", department, (err) => {
+          console.log(department);
+          if (err) {
+            console.log(err);
+          }
+        });
+        console.log("Department added.");
+        start();
+      });
+  };
 
-const viewAllDepartments = () => {
-  db.getDepartments()
-    .then(([departments]) => {
-      console.table(departments);
-    })
-    .then(() => start());
-};
-const viewAllRoles = () => {
-  db.getRoles()
-    .then(([role]) => {
-      console.table(role);
-    })
-    .then(() => start());
-};
-const viewAllEmployees = () => {
-  db.getEmployees()
-    .then(([employees]) => {
-      console.table(employees);
-    })
-    .then(() => start());
-};
+  const viewAllDepartments = () => {
+    db.getDepartments()
+      .then(([departments]) => {
+        console.table(departments);
+      })
+      .then(() => start());
+  };
+  const viewAllRoles = () => {
+    db.getRoles()
+      .then(([role]) => {
+        console.table(role);
+      })
+      .then(() => start());
+  };
+  const viewAllEmployees = () => {
+    db.getEmployees()
+      .then(([employees]) => {
+        console.table(employees);
+      })
+      .then(() => start());
+  };
+}
