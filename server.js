@@ -170,24 +170,23 @@ const updatedRole = () => {
   inquirer
     .prompt([
       {
-        type: "confirm",
-        name: "updateEmp",
-        message: "Do you want to update an employee?",
+        message: "What is the id of the employee you'd like to update?",
+        type: "input",
+        name: "id",
       },
       {
+        message: "What role_id  would you like to update to?",
         type: "input",
-        name: "newRole",
-        message: "What is there new role_id?",
+        name: "role_id",
       },
     ])
-    .then((newRole) => {
-      let updatedRole = newRole.role;
-      let sql = `INSERT INTO role VALUES (default, "${newRole}")`;
-      db2.query(sql, newRole, (err, res) => {
+    .then((employee) => {
+      console.log(employee);
+      let updatedRole = { role_id: employee.role_id };
+      let sql = `UPDATE employee SET ? WHERE id = "${employee.id}"`;
+      db2.query(sql, updatedRole, (err, res) => {
         if (err) throw err;
-        console.info("");
-        console.info(`Role has been changed to "${updatedRole}"`);
-        console.info("");
+        console.info(`Role has been changed to "${updatedRole.role_id}"`);
 
         start();
       });
