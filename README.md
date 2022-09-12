@@ -18,6 +18,8 @@ Install your dependencies with "npm i" in the terminal. the go into mysql in the
 
 Once you are in the app you will have a number of options to choose from. You can see the existing departments, roles, and employees by choosing the appropriate selection. You can add a department by clicking on the appropriate selection and giving the needed addition information. Same thing with role and employee. You can also update an employee by selecting their id and change there role by typing in a new role id. When you are don you can press ctrl + c to close the application.
 
+[](assets/employee-tracker-walk-through.webm)
+
 ## Contributors
 
 David Healy
